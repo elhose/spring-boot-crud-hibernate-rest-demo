@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class EmployeeDAOHibernateImpl implements EmployeeDAO{
+public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 
     //define entity manager - field injection
     @Autowired
@@ -32,5 +32,39 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO{
 
         //get list
         return list;
+    }
+
+    @Override
+    @Transactional
+    public void saveEmployee(Employee employee) {
+
+        Session session = entityManager.unwrap(Session.class);
+
+        session.saveOrUpdate(employee);
+
+    }
+
+    @Override
+    @Transactional
+    public Employee getEmployee(Integer id) {
+
+        Session session = entityManager.unwrap(Session.class);
+
+        Employee employee = session.get(Employee.class, id);
+
+        return employee;
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) {
+
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Employee> query = session.createQuery("delete from Employee where id=employeeId", Employee.class);
+
+        query.setParameter("employeeId", id);
+
+        query.executeUpdate();
     }
 }
