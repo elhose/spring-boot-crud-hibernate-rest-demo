@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import tt.psc.springboot.crudhibernaterestdemo.entity.Employee;
 
 import javax.persistence.EntityManager;
@@ -18,7 +17,6 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
     private EntityManager entityManager;
 
     @Override
-    @Transactional
     public List<Employee> getEmployees() {
 
         //get current hibernate session
@@ -35,7 +33,6 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
     }
 
     @Override
-    @Transactional
     public void saveEmployee(Employee employee) {
 
         Session session = entityManager.unwrap(Session.class);
@@ -45,7 +42,6 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
     }
 
     @Override
-    @Transactional
     public Employee getEmployee(Integer id) {
 
         Session session = entityManager.unwrap(Session.class);
@@ -56,7 +52,6 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
     }
 
     @Override
-    @Transactional
     public void deleteById(Integer id) {
 
         Session session = entityManager.unwrap(Session.class);
