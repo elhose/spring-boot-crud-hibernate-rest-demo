@@ -37,7 +37,7 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 
         Session session = entityManager.unwrap(Session.class);
 
-        session.saveOrUpdate(employee);
+        session.save(employee);
 
     }
 
@@ -56,10 +56,15 @@ public class EmployeeDAOHibernateImpl implements EmployeeDAO {
 
         Session session = entityManager.unwrap(Session.class);
 
-        Query<Employee> query = session.createQuery("delete from Employee where id=employeeId", Employee.class);
+        Employee employee = session.get(Employee.class,id);
 
-        query.setParameter("employeeId", id);
+        session.delete(employee);
+    }
 
-        query.executeUpdate();
+    @Override
+    public void updateEmployee(Employee employee) {
+        Session session = entityManager.unwrap(Session.class);
+
+        session.update(employee);
     }
 }
