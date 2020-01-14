@@ -1,6 +1,7 @@
 package tt.psc.springboot.crudhibernaterestdemo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tt.psc.springboot.crudhibernaterestdemo.dao.EmployeeDAO;
@@ -12,6 +13,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
+    @Qualifier("employeeDAOJPAImpl")    //told spring to use JPA impl
     private EmployeeDAO employeeDAO;
 
     @Override

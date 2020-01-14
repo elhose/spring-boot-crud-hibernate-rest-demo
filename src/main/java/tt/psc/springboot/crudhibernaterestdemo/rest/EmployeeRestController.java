@@ -31,7 +31,7 @@ public class EmployeeRestController {
     @PostMapping
     public Employee addEmployee(@RequestBody Employee employee){
         employeeService.saveEmployee(employee);
-        return employeeService.getEmployee(employee.getId());
+        return employee;
     }
 
     @PutMapping
